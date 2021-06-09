@@ -29,6 +29,8 @@
   MIT
 
   ## Images
+  ![screenshot](pic1.png)
+  ![screenshot](pic2.png)
 
   ## URL to deployed site
 
