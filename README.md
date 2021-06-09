@@ -3,7 +3,7 @@
   # Tech-Blog
   
   ## Description:
-  This is a project that has required the use of the Model-View-Controller paradigm in order to complete. Utilising express, bycrypt, sequalize, dotenv, handlebars and mySQL, the project's goal is to create a blog that allows users to sign up, login, post blogs, delete said blogs and also comment on blogs. The commenting feature for this project is still in the process of being completed. 
+  This is a project that has required the use of the Model-View-Controller paradigm in order to complete. Utilising express, bycrypt, sequalize, dotenv, handlebars and mySQL, the project's goal is to create a blog that allows users to sign up, login, post blogs, delete said blogs and also comment on blogs. 
   
   ## Table of contents:
   - [Installation](#installation)
