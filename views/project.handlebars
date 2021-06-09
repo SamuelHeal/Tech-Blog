@@ -12,4 +12,14 @@
       </div>
     </form>
 </section>
+  <div class="comments">
+    <h2>Comments</h2>
+    {{#each comments as |comment|}}
+    <h6>{{comment.user.name}}</h6>
+    <p>
+      {{comment.comment}}
+    </p>
+    {{/each}}
+  </div>
 </div>
+
