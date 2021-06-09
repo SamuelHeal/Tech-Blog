@@ -1,12 +1,27 @@
 [
     {
-      "comment": "Wow this is a great post keep it up!",
+      "comment": "I totally agree!",
+      "user_id": 1,
+      "post_id": 1
+    },
+    {
+      "comment": "It truly does rock!",
       "user_id": 2,
       "post_id": 1
     },
     {
       "comment": "Hey guys this is my first time using the comments, hope it works 👋",
+      "user_id": 3,
+      "post_id": 2
+    },
+    {
+      "comment": "You rule.",
+      "user_id": 1,
+      "post_id": 2
+    },
+    {
+      "comment": "I like pasta!",
       "user_id": 2,
-      "post_id": 1
+      "post_id": 3
     }
 ]
