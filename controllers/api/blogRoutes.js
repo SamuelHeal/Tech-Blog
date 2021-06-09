@@ -1,7 +1,8 @@
 const router = require('express').Router();
-const { Blog } = require('../../models');
+const { Blog, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+// creating a new blog
 router.post('/', withAuth, async (req, res) => {
   try {
     const newBlog = await Blog.create({
@@ -15,6 +16,23 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+// creating a new comment on a blog
+router.post('/:id', async (req, res) => {
+  try {
+      const newComment = await Comment.create({
+          comment: req.body.comment,
+          user_id: req.session.user_id,
+          post_id: req.params.id
+      })
+      res.status(200).json(newComment)
+
+  } catch (error) {
+    res.status(400).json({ error: error.toString() });
+  }
+});
+
+
+// deleting a
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const blogData = await Blog.destroy({
