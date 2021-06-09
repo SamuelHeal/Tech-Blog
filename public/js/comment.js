@@ -1,4 +1,5 @@
 
+// script to create a new comment
 const comment = async (event) => {
     event.preventDefault();
 

@@ -2,9 +2,10 @@ const router = require('express').Router();
 const { Blog, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
+// getting all blogs
 router.get('/', async (req, res) => {
   try {
-    const blogData = await Blog.findAll({
+    const blogInfo = await Blog.findAll({
       include: [
         {
           model: User,
@@ -13,7 +14,7 @@ router.get('/', async (req, res) => {
       ],
     });
 
-    const blogs = blogData.map((blog) => blog.get({ plain: true }));
+    const blogs = blogInfo.map((blog) => blog.get({ plain: true }));
     res.render('homepage', { 
       blogs, 
       logged_in: req.session.logged_in 
@@ -23,9 +24,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+// getting a single blog
 router.get('/blog/:id', async (req, res) => {
   try {
-    const blogData = await Blog.findByPk(req.params.id, {
+    const blogInfo = await Blog.findByPk(req.params.id, {
       include: [
         {
           model: User,
@@ -39,7 +41,7 @@ router.get('/blog/:id', async (req, res) => {
       }],
     });
 
-    const blog = blogData.get({ plain: true });
+    const blog = blogInfo.get({ plain: true });
 
     res.render('blog', {
       ...blog,
@@ -50,17 +52,15 @@ router.get('/blog/:id', async (req, res) => {
   }
 });
 
-// Use withAuth middleware to prevent access to route
+// opening up the users dashboard
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
+    const userInfo = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Blog }],
     });
 
-    const user = userData.get({ plain: true });
-
+    const user = userInfo.get({ plain: true });
     res.render('dashboard', {
       ...user,
       logged_in: true
@@ -70,6 +70,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
   }
 });
 
+// directing to the login page, but only allow if the user is not already logged in
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/dashboard');
@@ -79,6 +80,7 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+// signup page
 router.get('/signup', async (req, res) => {
   try {
       res.render('signup', {

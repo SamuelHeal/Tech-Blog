@@ -22,7 +22,7 @@ router.post('/:id', async (req, res) => {
       const newComment = await Comment.create({
           comment: req.body.comment,
           user_id: req.session.user_id,
-          post_id: req.params.id
+          blog_id: req.params.id
       })
       res.status(200).json(newComment)
 
@@ -32,7 +32,7 @@ router.post('/:id', async (req, res) => {
 });
 
 
-// deleting a
+// deleting a blog
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const blogData = await Blog.destroy({

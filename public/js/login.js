@@ -1,12 +1,27 @@
-const loginFormHandler = async (event) => {
+const loginForm = document.getElementById("loginForm")
+const signUpForm = document.getElementById("signUpForm")
+const signUpSwitch = document.getElementById("signUpBtn")
+const loginSwitch = document.getElementById("loginBtn")
+
+// functions to switch between login and signup forms on click
+signUpSwitch.addEventListener("click", function() {
+  loginForm.style.display = "none"
+  signUpForm.style.display = "block"
+})
+
+loginSwitch.addEventListener("click", function() {
+  loginForm.style.display = "block"
+  signUpForm.style.display = "none"
+})
+
+// function to login
+const loginManager = async (event) => {
   event.preventDefault();
 
-  // Collect values from the login form
   const email = document.querySelector('#email-login').value.trim();
   const password = document.querySelector('#password-login').value.trim();
 
   if (email && password) {
-    // Send a POST request to the API endpoint
     const response = await fetch('/api/users/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
@@ -14,7 +29,6 @@ const loginFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      // If successful, redirect the browser to the profile page
       document.location.replace('/dashboard');
     } else {
       alert("Incorrect email or password");
@@ -22,7 +36,8 @@ const loginFormHandler = async (event) => {
   }
 };
 
-const signupFormHandler = async (event) => {
+// function to signup
+const signupManager = async (event) => {
   event.preventDefault();
 
   const name = document.querySelector('#name-signup').value.trim();
@@ -44,26 +59,6 @@ const signupFormHandler = async (event) => {
   }
 };
 
-document
-  .querySelector('.login-form')
-  .addEventListener('submit', loginFormHandler);
+document.querySelector('.login-form').addEventListener('submit', loginManager);
+document.querySelector('.signup-form').addEventListener('submit', signupManager);
 
-document
-  .querySelector('.signup-form')
-  .addEventListener('submit', signupFormHandler);
-
-
-const loginForm = document.getElementById("loginForm")
-const signUpForm = document.getElementById("signUpForm")
-const signUpSwitch = document.getElementById("signUpBtn")
-const loginSwitch = document.getElementById("loginBtn")
-
-signUpSwitch.addEventListener("click", function() {
-  loginForm.style.display = "none"
-  signUpForm.style.display = "block"
-})
-
-loginSwitch.addEventListener("click", function() {
-  loginForm.style.display = "block"
-  signUpForm.style.display = "none"
-})
